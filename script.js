@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const imageContainer = document.getElementById("image-container");
   const randomBtn = document.getElementById("random-btn");
 
-  // Fetch all breeds and populate the dropdown
   fetch("https://dog.ceo/api/breeds/list/all")
     .then((res) => res.json())
     .then((data) => {
@@ -11,12 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
       breeds.forEach((breed) => {
         const option = document.createElement("option");
         option.value = breed;
-        option.textContent = breed;
+        option.textContent = breed.charAt(0).toUpperCase() + breed.slice(1);
         breedSelect.appendChild(option);
       });
     });
 
-  // Show image for selected breed
   breedSelect.addEventListener("change", (e) => {
     const breed = e.target.value;
     if (breed) {
@@ -28,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Random dog image
   randomBtn.addEventListener("click", () => {
     fetch("https://dog.ceo/api/breeds/image/random")
       .then((res) => res.json())
